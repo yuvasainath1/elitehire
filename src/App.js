@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Home from './Components/MainComponent/Home'
+import Signin from './Components/Signin';
+import Signup from './Components/Signup';
+import Ainterface from './Components/AddNewRole'
+import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
+import AppBar from './Components/MainComponent/Appbar';
+import Uadmin from './Components/Updateadmin'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path='/signup' element={<><AppBar name1="Sign Up" name2="Sign In"/><Signup></Signup></>}/>
+        <Route exact path='/signin' element={<><AppBar name1="Sign Up" name2="Sign In"/><Signin></Signin></>}/>
+        <Route exact path='/' element={<Home></Home>}/>
+        <Route exact path='/admin' element={<><AppBar name3={<Uadmin> </Uadmin>} name4="delete Account" name5="Sign Out"/><Ainterface></Ainterface></>}/>
+        <Route exact path='/user' element={<></>}/>
+      </Routes>
+    </Router>
   );
 }
 
