@@ -17,7 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 
 const OpenDialogButton = styled(Button)(({ theme }) => ({
-  margin: theme.spacing(20),
+  // margin: theme.spacing(10),
   backgroundColor: '#1976d2',
   color: '#fff',
   '&:hover': {
@@ -55,6 +55,14 @@ const FormComponent = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setFormData({
+      role: '',
+    description: '',
+    company: '',
+    salary: '',
+    location: '',
+    logo: null,
+    });
   };
 
   const handleChange = (e) => {
@@ -84,13 +92,14 @@ const FormComponent = () => {
 
   const handleSubmit = async() => {
     const newobj={
-      role: formData.role,
+      Role: formData.role,
     description: formData.description,
     company: formData.company,
     salary: formData.salary,
     location: formData.location,
     logo: imageData,
     }
+    console.log(newobj);
     try{
       const newpromise=await fetch('http://localhost:3000/api/v1/work/createnew',{
       method: 'POST',
@@ -106,7 +115,9 @@ const FormComponent = () => {
     const data = await newpromise.json();
     console.log(data);
     alert('New Role added with given Specifications');
-    window.location.href='http://localhost:3001/user'
+    setTimeout(() => {
+      window.location.href="http://localhost:3001/admin"
+    }, 500);
 } catch (error) {
   console.error('There has been a problem with your fetch operation:', error);
   alert('Could  Not Add role');
@@ -115,7 +126,7 @@ const FormComponent = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{marginTop:'2%', marginLeft:'64%'}}>
       <OpenDialogButton variant="contained" onClick={handleClickOpen}>
         Add New Role
       </OpenDialogButton>
